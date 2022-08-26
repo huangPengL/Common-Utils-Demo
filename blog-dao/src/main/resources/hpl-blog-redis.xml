@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="redisPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
+		<property name="minIdle" value="8" />
+		<property name="maxIdle" value="64" />
+		<property name="maxTotal" value="256" />
+		<property name="maxWaitMillis" value="200" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+	</bean>
+
+	<bean id="redis" class="com.hpl.redis.Redis">
+		<constructor-arg name="redisPoolConfig" ref="redisPoolConfig"/>
+		<constructor-arg name="ip" value="${redis.ip}"/>
+		<constructor-arg name="port" value="${redis.port}"/>
+		<constructor-arg name="auth" value="${redis.auth}"/>
+		<constructor-arg name="timeout" value="${redis.timeout}"/>
+	</bean>
+
+
+</beans>

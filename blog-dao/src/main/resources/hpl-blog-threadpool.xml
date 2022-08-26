@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 线程池, 任务不排队 -->
+    <bean id="threadPool" class="org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean">
+        <property name="corePoolSize" value="8" />
+        <property name="maxPoolSize" value="1024" />
+        <property name="queueCapacity" value="0" />
+        <property name="waitForTasksToCompleteOnShutdown" value="true" />
+        <property name="awaitTerminationSeconds" value="5" />
+    </bean>
+
+    <!-- 线程池, 任务可排队 -->
+    <bean id="queueThreadPool" class="org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean">
+        <property name="corePoolSize" value="32" />
+        <property name="maxPoolSize" value="1024" />
+        <property name="queueCapacity" value="1024" />
+        <property name="waitForTasksToCompleteOnShutdown" value="true" />
+        <property name="awaitTerminationSeconds" value="5" />
+    </bean>
+</beans>
+
